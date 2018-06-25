@@ -1,0 +1,532 @@
+
+
+<h2 style="">Giang vien</h2>
+
+
+
+<!-- Modal edit-->
+<div id="addcbModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="add">Thêm Mới Cán Bộ</h4>
+                </div>
+                <div class="modal-body">              
+                    <p>Mã CBNV : <input id="addma" class="inputs" type="text"/></p>
+                    <p>Họ CBNV : <input id="addho" class="inputs" type="text"/></p>
+                    <p>Tên CBNV : <input id="addten" class="inputs" type="text"/></p>
+                    <p>Quyền:  <select  class="inputs" id="addmq"></select></p>
+                    <p>Loại Giảng Viên:<select class="inputs" id="addlgv"></select></p>
+                    <p>Ngày Sinh : <input id="addtns" class="inputs" type="date"/></p>
+                    <p>Email : <input id="addemail" class="inputs" type="email"/></p>
+                    <p>Địa Chỉ: <input id="adddc" class="inputs" type="text"/></p>
+                    <p>Điện Thoại: <input id="adddt" class="inputs" type="text"/></p>
+                    <p>Tên Đăng Nhập : <input id="addtdn" class="inputs" type="text"/></p>
+                    <p>Mật Khẩu : <input id="addmk" class="inputs" type="text"/></p>
+                </div>
+                <div class="modal-footer" id="">
+                     <button id="saveCbnv" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+</div>
+<div id="addqlModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="add">Cập Nhật Chi Tiết Quản Lý</h4>
+                </div>
+                <div class="modal-body">              
+                    <p>Mã CBNV : <input id="addqlma" class="inputs" type="text"/></p>
+                    <p>Mã Đơn Vị:  <select  class="inputs" id="addqldv"></select></p>
+                    <p>Chức Vụ :<select class="inputs" id="addqlcv"></select></p>
+                    <p>Thời Hạn : <input id="addqlth" class="inputs" type="text"/></p>
+                </div>
+                <div class="modal-footer" id="">
+                     <button id="saveql" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+</div>
+<div id="editcbModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="add">Sửa Thông Tin Cán Bộ</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Mã CBNV : <input id="editma" class="inputs" type="text"/></p>
+                    <p>Họ CBNV : <input id="editho" class="inputs" type="text"/></p>
+                    <p>Tên CBNV : <input id="editten" class="inputs" type="text"/></p>
+                    <p>Quyền:  <select  class="inputs" id="editq"></select></p>
+                    <p>Loại Giảng Viên:<select class="inputs" id="editlgv"></select></p>
+                    <p>Ngày Sinh : <input id="editns" class="inputs" type="text"/></p>
+                    <p>Email : <input id="editmail" class="inputs" type="email"/></p>
+                    <p>Địa Chỉ: <input id="editdc" class="inputs" type="text"/></p>
+                    <p>Điện Thoại: <input id="editdt" class="inputs" type="text"/></p>
+                    <p>Tên Đăng Nhập : <input id="editdn" class="inputs" type="text"/></p>
+                    <p>Mật Khẩu : <input id="editmk" class="inputs" type="text"/></p>
+                    <p>Học Vị : <input id="edithv" class="inputs" type="text"/></p>
+                    <p>Phái : <input id="editp" class="inputs" type="text"/></p>
+                </div>
+                <div class="modal-footer" id="edit3">
+                    
+                </div>
+            </div>
+        </div>
+</div>
+
+<div id="detaicblModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="add">Thông Tin Chi Tiết</h4>
+                </div>
+                <div class="modal-body">   
+                    <fieldset disabled>       
+                  <p>  Mã CBNV : <input id="detailma" class="inputs" type="text"></p>
+                  <p>  Họ & Tên : <input id="detailho" class="inputs" type="text"/></p>
+                  <p>  Ngày Sinh : <input id="detailns" class="inputs" type="text"/></p>
+                  <p>  Phái : <input id="detailphai" class="inputs" type="text"/></p>
+                  <p>  Chức Vụ : <input id="detailcv" class="inputs" type="text"/></p>
+                  <p>  Đơn Vị : <input id="detailtdv" class="inputs" type="text"/></p>
+                  <p>  Học Vị : <input id="detailhv" class="inputs" type="text"/></p>
+                  <p>  Số Điện Thoại : <input id="detailsdt" class="inputs" type="text"/></p>
+                  <p>  Địa Chỉ : <input id="detaildc" class="inputs" type="text"/></p>
+                  </fieldset>    
+                </div>
+                <div class="modal-footer" id="edit1">
+                </div>
+            </div>
+        </div>
+</div>
+<div id="deleteModel" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="add">Bạn Có Muốn Xóa</h4>
+                </div>
+                <div class="modal-body">   
+                    <fieldset disabled>       
+                    p>Mã CBNV : <input id="deletema" class="inputs" type="text"/></p>
+                    <p>Họ CBNV : <input id="deleteho" class="inputs" type="text"/></p>
+                    <p>Tên CBNV : <input id="deleteten" class="inputs" type="text"/></p>
+                    <p>Quyền:  <input  class="inputs" id="deleteq"></p>
+                    <p>Loại Giảng Viên:<input class="inputs" id="deletelgv"></p>
+                    <p>Ngày Sinh : <input id="deletens" class="inputs" type="text"/></p>
+                    <p>Email : <input id="deletemail" class="inputs" type="email"/></p>
+                    <p>Địa Chỉ: <input id="deletedc" class="inputs" type="text"/></p>
+                    <p>Điện Thoại: <input id="deletedt" class="inputs" type="text"/></p>
+                    <p>Tên Đăng Nhập : <input id="deletedn" class="inputs" type="text"/></p>
+                    <p>Mật Khẩu : <input id="deletemk" class="inputs" type="text"/></p>
+                    <p>Học Vị : <input id="deletehv" class="inputs" type="text"/></p>
+                    <p>Phái : <input id="deletephai" class="inputs" type="text"/></p>
+                  </fieldset>    
+                </div>
+                <div class="modal-footer" id="edit2">
+                </div>
+            </div>
+        </div>
+</div>
+  <!-- Modal -->
+<div class="">
+    <div class="container">
+        <div class="row">
+        <div class="col-sm-6">
+            <button class="btn btn-info fa fa-plus-square" id="addCb" onclick="themCbnv()" type="button"> Thêm</button>
+        </div>
+          <div class="col-sm-6">
+            <p>Tìm Kiếm: <span><input type="text" id="seach" onkeyup="seach()"/></span></p>
+        </div>
+        </div>
+    </div>
+</div>
+<table class="table">
+    <tr align='center' height='30px'>
+        <td>Mã Cán Bộ</td>
+        <td>Họ & Tên Cán Bộ</td>
+        <td>Số Điện Thoại</td>
+        <td>Học Vị</td>
+        <td>Ngày Sinh</td>
+        <td>Email</td>
+        <td></td>
+    </tr>
+    <tbody id="tbody">
+
+    </tbody>
+</table>
+<ul class="sync-pagination"></ul>
+@section scripts{
+    <script src="~/Assets/Personal/js/vendor/jquery-ui.js"></script>
+    <script src="~/Assets/Personal/js/vendor/paginathing.js"></script>
+<script>
+$(document).ready(function () {
+    loadcb()
+    $('#tbody').paginathing({
+                 perPage: 5,
+             });
+     
+})
+class CBNV {
+            constructor(ma, ho, ten, malgv, maq,ns,semail,dc,dt,tdn,mk,hv,sphai) {
+                this.maCBNV = ma;
+                this.hoCBNV = ho;
+                this.tenCBNV = ten;
+                this.maLoaiGiangVien = malgv;
+                this.maQuyen = maq;
+                this.ntns = ns;
+                this.email = semail;
+                this.diaChi = dc;
+                this.dienThoai = dt;
+                this.tenDangNhap = tdn;
+                this.matKhau = mk;
+                this.hocVi = hv;
+                this.phai = sphai;
+            }
+        }
+function convertDatetime(dt) {
+
+    res = dt.substring(8, 10) + "-" + dt.substring(5, 7) + "-" + dt.substring(0, 4);
+    return res;
+}
+function loadcb(){
+    $.ajax({
+        type: "GET",
+        url: "/api/Cbnv",
+        success: function(data){
+            console.log(data);
+            getData(data);
+           // seach(data);
+        }
+    })
+}
+//load droplist lgv
+let dropdown1 = $('#addlgv');
+        dropdown1.empty();
+        dropdown1.append('<option selected="true" disabled>Chọn Loại Giảng Viên</option>');
+        dropdown1.prop('selectedIndex', 0);
+        const url1 = '/api/Loaigv';
+        // Populate dropdown with list of provinces
+        $.getJSON(url1, function (data) {
+            console.log(data);
+            $.each(data, function (key, entry) {
+                dropdown1.append($('<option></option>').attr('value', entry.maLoaiGiangVien).text(entry.tenLoaiGiangVien));
+            })
+        });
+//load droplist quyen
+let dropdown2 = $('#addmq');
+        dropdown2.empty();
+        dropdown2.append('<option selected="true" disabled>Chọn Quyền</option>');
+        dropdown2.prop('selectedIndex', 0);
+        const url2 = '/api/Quyen';
+        // Populate dropdown with list of provinces
+        $.getJSON(url2, function (data) {
+            console.log(data);
+            $.each(data, function (key, entry) {
+                dropdown2.append($('<option></option>').attr('value',entry.maQuyen).text(entry.tenQuyen));
+            })
+        });
+function getData(data) {
+
+    $("#tbody").html("");
+    data.forEach(item => {
+        $("#tbody").append(loadcbnv(item));        
+    });
+   
+}
+function loadcbnv(item) {
+    detailsHtml ='<tr>';
+    detailsHtml += '<td>'+item.maCBNV+'</td>'+
+    '<td >'+item.hoCBNV +" "+ item.tenCBNV+'</td>'+
+    '<td>'+item.dienThoai +'</td>'+
+    '<td>'+item.hocVi+'</td>'+
+    '<td>'+convertDatetime(item.ntns) +'</td>'+
+    '<td>'+item.email +'</td>'+
+    '<td>'
+    +'<button type="button" class=" btn btn-info fa fa-edit showcn" onclick="suaCbnv(\''+ item.maCBNV +'\')"><span class="tooltiptext">Sửa</span></button>|<button type="button" class="btn btn-info fa fa-file-text-o showcn" onclick="chitietCbnv(\'' + item.maCBNV + '\')"><span class="tooltiptext">Chi tiết</span></button>|<button type="button" class="btn btn-info fa fa-trash-o showcn" onclick="xoaCbnv(\'' + item.maCBNV + '\')"><span class="tooltiptext">Xóa </span></button> '
+    detailsHtml +='</tr>';  
+    return detailsHtml;
+}
+function xoaCbnv(id){ 
+    $("#deleteModel").modal("show");
+
+    $.ajax({
+        url:'/api/Cbnv/'+ id,
+        type: "GET",
+        success:function(data){
+            console.log(data);
+            $("#deletema").val(data.maCBNV);
+            $("#deleteho").val(data.hoCBNV);
+            $("#deleteten").val(data.hoCBNV);
+            $("#deleteq").val(data.maQuyen);
+            $("#deletelgv").val(data.maLoaiGiangVien);
+            $("#deletemail").val(data.email);
+            $("#deletens").val(convertDatetime(data.ntns));
+            $("#deletephai").val(data.phai);
+            $("#deletehv").val(data.hocVi);
+            $("#deletedt").val(data.dienThoai);
+            $("#deletedc").val(data.diaChi);
+            $("#deletedn").val(data.tenDangNhap);
+            $("#deletemk").val(data.matKhau);
+            $("#edit2").html('<button onclick="savedelete(\''+ data.maCBNV +'\')" type="button" class="btn btn-default" data-dismiss="modal">Xóa</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+        }
+    })
+}
+function savedelete(id){
+    $.ajax({
+        url:'/api/Cbnv/Delete/'+id,
+        type:'GET',
+        contentType: "application/json; charset=utf-8",
+        dataType: 'json',
+        success: function(data){
+        console.log(data);
+        loadcb();
+        alert("Đã Xóa");
+        },
+        error: function(){
+            alert("Xóa Không Thành Công");
+        }
+    });
+}
+function suaCbnv(id){
+    let dropdown3 = $('#editq');
+    dropdown3.empty();
+    let dropdown4 = $('#editlgv');
+    dropdown4.empty();
+    $("#editcbModal").modal("show");
+    $.ajax({
+        url:'/api/Cbnv/'+ id,
+        type: "GET",
+        success:function(data){
+            $("#editma").val(data.maCBNV);
+            $("#editho").val(data.hoCBNV);
+            $("#editten").val(data.tenCBNV);
+            $("#editns").val(convertDatetime(data.ntns));
+            $("#editp").val(data.phai);
+            $("#edithv").val(data.hocVi);
+            $("#editdt").val(data.dienThoai);
+            $("#editdc").val(data.diaChi);
+            $("#editmail").val(data.email);
+            $("#editdn").val(data.tenDangNhap);
+            $("#editmk").val(data.matKhau);
+            dropdown3.append('<option selected="true" disabled>Chọn Quyền</option>');
+            dropdown3.prop('selectedIndex', 0);
+            const url3 = '/api/Quyen';
+            // Populate dropdown with list of provinces
+                $.getJSON(url3, function (dat) {
+                    console.log('step 1');
+                    console.log(dat);
+                    dat.forEach(key => {
+                        console.log(key);
+                         if (key.maQuyen == data.maQuyen) {
+                            dropdown3.append($('<option selected="true" value='+key.maQuyen+'></option>').text(key.tenQuyen));
+                        }
+                        else {
+                            dropdown3.append($('<option value='+key.maQuyen+'></option>').text(key.tenQuyen));
+                            }
+                        })
+                    })
+            dropdown4.append('<option selected="true" disabled>Chọn Loại Giảng Viên</option>');
+            dropdown4.prop('selectedIndex', 0);
+            const url4 = '/api/Loaigv';
+            // Populate dropdown with list of provinces
+               $.getJSON(url4, function (dat) {
+                    console.log('step 2');
+                    console.log(dat);
+                    dat.forEach(key => {
+                        console.log(key);
+                         if (key.maLoaiGiangVien == data.maLoaiGiangVien) {
+                            dropdown4.append($('<option selected="true" value='+key.maLoaiGiangVien+'></option>').text(key.tenLoaiGiangVien));
+                        }
+                        else {
+                            dropdown4.append($('<option value='+key.maLoaiGiangVien+'></option>').text(key.tenLoaiGiangVien));
+                            }
+                        })
+                    })
+            $("#edit3").html('<button onclick="saveedit(\''+ data.maCBNV +'\')" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+            console.log(data);
+        }
+    })
+}
+function saveedit(id){
+        var ma = $('#editma').val();
+        var ho = $('#editho').val();
+        var ten = $('#editten').val();
+        var malgv = $('#editlgv').val();
+        var maq = $('#editq').val();
+        var ns = $('#editns').val();
+        var semail = $('#editmail').val();
+        var dc = $('#editdc').val();
+        var dt = $('#editdt').val();
+        var tdn = $('#editdn').val();
+        var mk = $('#editmk').val();
+        var hv = $('#edithv').val();
+        var sphai = $('#editp').val();
+        var temp = new CBNV(ma, ho, ten, malgv, maq,ns,semail,dc,dt,tdn,mk,hv,sphai);
+       console.log(temp);
+        $.ajax({
+            url:'/api/Cbnv/Edit/'+id,
+            type:'POST',
+            data: JSON.stringify(temp),
+            contentType: "application/json; charset=utf-8",
+            dataType: 'json',
+                success: function(){
+                    loadcb();
+                    alert("Cập Nhật Thành Công");
+                },
+                error: function(){
+                    alert("Cập Nhật Thất Bại")
+                }
+            });
+        }
+function chitietCbnv(id){
+    $("#detaicblModal").modal("show");
+    $.ajax({
+        url:'/api/Cbnv/Detail/'+ id,
+        type: "GET",
+        error:function(){
+            confirm("Chưa Cập Nhật Chi Tiết Quản Lý");
+        },
+        success:function(data){
+            for(i=0;i<data.length;i++){
+            console.log(data[i]);
+            $("#detailma").val(data[i].maCBNV);
+            $("#detailho").val(data[i].hoCBNV +''+data[i].tenCBNV);
+            $("#detailns").val(convertDatetime(data[i].ntns));
+            $("#detailphai").val(data[i].phai);
+            $("#detailcv").val(data[i].tenChucVu)
+            $("#detailtdv").val(data[i].tenDonVi);
+            $("#detailhv").val(data[i].hocVi);
+            $("#detailsdt").val(data[i].dienThoai);
+            $("#detaildc").val(data[i].diaChi);
+            $("#edit1").html('<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+        }}
+    })
+}
+function themCbnv(){
+            $('#addma').val('');
+            $('#addho').val('');
+            $('#addten').val('');
+            $('#addmq').val('');
+            $('#addlgv').val('');
+            $('#addtns').val('');
+            $('#addemail').val('');
+            $('#adddc').val('');
+            $('#adddt').val('');
+            $('#addtdn').val('');
+            $('#addmk').val('');
+            $("#addcbModal").modal("show");         
+        }
+$('#saveCbnv').click(function () {
+    $.ajax({
+        url: "/api/Cbnv",
+        type: "post",
+        contentType: "application/json",
+        dataType: 'json',
+        data: JSON.stringify({
+        maCBNV: $('#addma').val(),
+        hoCBNV: $('#addho').val(),
+        tenCBNV: $('#addten').val(),
+        maQuyen: $('#addmq').val(),
+        maLoaiGiangVien: $('#addlgv').val(),
+        ntns: $('#addtns').val(),
+        email: $('#addemail').val(),
+        diaChi: $('#adddc').val(),
+        dienThoai: $('#adddt').val(),
+        tenDangNhap: $('#addtdn').val(),
+        matKhau: $('#addmk').val(),                       
+        }),
+        success: function () {
+            confirm("Thêm Thành Công");
+            console.log( $('#addma').val());
+            Addql($('#addma').val());
+        },
+        error: function(data){
+            confirm("Lỗi Dữ liệu !!! Kiểm Tra Lại.")
+        }
+        });
+     });
+
+function Addql(ma){
+            $('#addqlth').val('');
+            $("#addqlModal").modal("show");
+            $("#addqlma").val(ma);
+            $("#edit4").html('<button onclick="saveedit(\''+ma +'\')" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+            loaddv(),
+            loadcv(),
+$('#saveql').click(function (id) {
+    $.ajax({
+    url: "/api/Ctql/"+id,
+    type: "post",
+    contentType: "application/json; charset=utf-8",
+    dataType: 'json',
+    data: JSON.stringify({
+    maCBNV: $("#addqlma").val(),
+    maDonVi: $('#addqldv').val(),
+    maChucVu: $('#addqlcv').val(),
+    thoiHan: $('#addqlth').val(),          
+    }),
+    success: function () {         
+        loadcb();
+        confirm("Thêm Thành Công");
+        console.log( $('#addma').val());
+        },
+        error: function(data){
+            confirm("Lỗi Dữ liệu !!! Kiểm Tra Lại.");
+            Addql($('#addma').val());
+            }
+        });
+    });
+}
+function convetToVietnam(str) { 
+    str= str.toLowerCase();
+    str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+    str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+    str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+    str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+    str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+    str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+    str= str.replace(/đ/g,"d"); 
+    
+    str= str.replace(/-+-/g,"-");
+    str= str.replace(/^\-+|\-+$/g,""); 
+
+    return str; 
+}
+function seach(){
+    $.ajax({
+        type: "GET",
+        url: "/api/Cbnv",
+        success: function(data){
+            keyOld = $("#seach").val();
+            arr = $("#tbody tr");
+            // console.log(arr);
+            for (i = 0; i < arr.length; i++) {
+                element = arr[i].getElementsByTagName("td")[1].innerHTML;
+                 tt =convetToVietnam(element); 
+                let key=convetToVietnam(keyOld);
+                console.log(tt.toUpperCase().indexOf(key.toUpperCase()));
+                if (tt.toUpperCase().indexOf(key.toUpperCase()) > -1) {
+                    arr[i].style.display = "";
+                } else {
+                    arr[i].style.display = "none";
+                }
+            }
+        }
+    });
+}
+
+</script>
+}
