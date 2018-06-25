@@ -142,9 +142,18 @@
 </div>
   <!-- Modal -->
 <div class="">
-    <button class="btn btn-info fa fa-plus-square" id="addCb" onclick="themCbnv()" type="button"> Thêm</button>
+    <div class="container">
+        <div class="row">
+        <div class="col-sm-6">
+            <button class="btn btn-info fa fa-plus-square" id="addCb" onclick="themCbnv()" type="button"> Thêm</button>
+        </div>
+          <div class="col-sm-6">
+            <p>Tìm Kiếm: <span><input type="text" id="seach" onkeyup="seach()"/></span></p>
+        </div>
+        </div>
+    </div>
 </div>
-<table class="table table-hover">
+<table class="table">
     <tr align='center' height='30px'>
         <td>Mã Cán Bộ</td>
         <td>Họ & Tên Cán Bộ</td>
@@ -158,27 +167,33 @@
 
     </tbody>
 </table>
+<ul class="sync-pagination"></ul>
 @section scripts{
+    <script src="~/Assets/Personal/js/vendor/jquery-ui.js"></script>
+    <script src="~/Assets/Personal/js/vendor/paginathing.js"></script>
 <script>
 $(document).ready(function () {
     loadcb()
-
+    $('#tbody').paginathing({
+                 perPage: 5,
+             });
+     
 })
 class CBNV {
             constructor(ma, ho, ten, malgv, maq,ns,semail,dc,dt,tdn,mk,hv,sphai) {
-                this.ma = ma;
-                this.ho = ho;
-                this.ten = ten;
-                this.malgv = malgv;
-                this.maq = maq;
-                this.ns = ns;
-                this.semail = semail;
-                this.dc = dc;
-                this.dt = dt;
-                this.tdn = tdn;
-                this.mk = mk;
-                this.hv = hv;
-                this.sphai = sphai;
+                this.maCBNV = ma;
+                this.hoCBNV = ho;
+                this.tenCBNV = ten;
+                this.maLoaiGiangVien = malgv;
+                this.maQuyen = maq;
+                this.ntns = ns;
+                this.email = semail;
+                this.diaChi = dc;
+                this.dienThoai = dt;
+                this.tenDangNhap = tdn;
+                this.matKhau = mk;
+                this.hocVi = hv;
+                this.phai = sphai;
             }
         }
 function convertDatetime(dt) {
@@ -193,6 +208,7 @@ function loadcb(){
         success: function(data){
             console.log(data);
             getData(data);
+           // seach(data);
         }
     })
 }
@@ -223,15 +239,17 @@ let dropdown2 = $('#addmq');
             })
         });
 function getData(data) {
+
     $("#tbody").html("");
     data.forEach(item => {
-        $("#tbody").append(loadcbnv(item));
+        $("#tbody").append(loadcbnv(item));        
     });
+   
 }
 function loadcbnv(item) {
     detailsHtml ='<tr>';
     detailsHtml += '<td>'+item.maCBNV+'</td>'+
-    '<td>'+item.hoCBNV +" "+ item.tenCBNV+'</td>'+
+    '<td >'+item.hoCBNV +" "+ item.tenCBNV+'</td>'+
     '<td>'+item.dienThoai +'</td>'+
     '<td>'+item.hocVi+'</td>'+
     '<td>'+convertDatetime(item.ntns) +'</td>'+
@@ -243,6 +261,7 @@ function loadcbnv(item) {
 }
 function xoaCbnv(id){ 
     $("#deleteModel").modal("show");
+
     $.ajax({
         url:'/api/Cbnv/'+ id,
         type: "GET",
@@ -261,7 +280,6 @@ function xoaCbnv(id){
             $("#deletedc").val(data.diaChi);
             $("#deletedn").val(data.tenDangNhap);
             $("#deletemk").val(data.matKhau);
-
             $("#edit2").html('<button onclick="savedelete(\''+ data.maCBNV +'\')" type="button" class="btn btn-default" data-dismiss="modal">Xóa</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
         }
     })
@@ -269,25 +287,16 @@ function xoaCbnv(id){
 function savedelete(id){
     $.ajax({
         url:'/api/Cbnv/Delete/'+id,
-        type:'POST',
+        type:'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
-        data: JSON.stringify({
-            maCBNV: $('#deletema').val(),
-            hoCBNV: $('#deleteho').val(),
-            tenCBNV: $('#addten').val(),
-            maQuyen: $('#deleteq').val(),
-            maLoaiGiangVien: $('#deletelgv').val(),
-            ntns: $('#deletens').val(),
-            email: $('#deletemail').val(),
-            diaChi: $('#deletedc').val(),
-            dienThoai: $('#deletedt').val(),
-            tenDangNhap: $('#deletedn').val(),
-            matKhau: $('#deletemk').val(),                   
-        }),
-        success: function(){
+        success: function(data){
+        console.log(data);
         loadcb();
         alert("Đã Xóa");
+        },
+        error: function(){
+            alert("Xóa Không Thành Công");
         }
     });
 }
@@ -317,30 +326,37 @@ function suaCbnv(id){
             const url3 = '/api/Quyen';
             // Populate dropdown with list of provinces
                 $.getJSON(url3, function (dat) {
-                    $.each(dat, function (key, entry) {
-                        if (entry.id == data.maQuyen) {
-                            dropdown3.append($('<option selected="true"></option>').attr('value', entry.id).text(entry.tenQuyen));
+                    console.log('step 1');
+                    console.log(dat);
+                    dat.forEach(key => {
+                        console.log(key);
+                         if (key.maQuyen == data.maQuyen) {
+                            dropdown3.append($('<option selected="true" value='+key.maQuyen+'></option>').text(key.tenQuyen));
                         }
                         else {
-                            dropdown3.append($('<option></option>').attr('value', entry.id).text(entry.tenQuyen));
+                            dropdown3.append($('<option value='+key.maQuyen+'></option>').text(key.tenQuyen));
                             }
                         })
-                    });
+                    })
             dropdown4.append('<option selected="true" disabled>Chọn Loại Giảng Viên</option>');
             dropdown4.prop('selectedIndex', 0);
             const url4 = '/api/Loaigv';
             // Populate dropdown with list of provinces
-                $.getJSON(url4, function (dat) {
-                    $.each(dat, function (key, entry) {
-                        if (entry.id == data.maQuyen) {
-                            dropdown4.append($('<option selected="true"></option>').attr('value', entry.id).text(entry.tenLoaiGiangVien));
+               $.getJSON(url4, function (dat) {
+                    console.log('step 2');
+                    console.log(dat);
+                    dat.forEach(key => {
+                        console.log(key);
+                         if (key.maLoaiGiangVien == data.maLoaiGiangVien) {
+                            dropdown4.append($('<option selected="true" value='+key.maLoaiGiangVien+'></option>').text(key.tenLoaiGiangVien));
                         }
                         else {
-                            dropdown4.append($('<option></option>').attr('value', entry.id).text(entry.tenLoaiGiangVien));
+                            dropdown4.append($('<option value='+key.maLoaiGiangVien+'></option>').text(key.tenLoaiGiangVien));
                             }
                         })
-                    });
+                    })
             $("#edit3").html('<button onclick="saveedit(\''+ data.maCBNV +'\')" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+            console.log(data);
         }
     })
 }
@@ -359,7 +375,7 @@ function saveedit(id){
         var hv = $('#edithv').val();
         var sphai = $('#editp').val();
         var temp = new CBNV(ma, ho, ten, malgv, maq,ns,semail,dc,dt,tdn,mk,hv,sphai);
-       console.log(temp.malgv);
+       console.log(temp);
         $.ajax({
             url:'/api/Cbnv/Edit/'+id,
             type:'POST',
@@ -374,7 +390,6 @@ function saveedit(id){
                     alert("Cập Nhật Thất Bại")
                 }
             });
-            console.log(data)
         }
 function chitietCbnv(id){
     $("#detaicblModal").modal("show");
@@ -452,31 +467,66 @@ function Addql(ma){
             loaddv(),
             loadcv(),
 $('#saveql').click(function (id) {
-
-            $.ajax({
-                url: "/api/Ctql/"+id,
-                type: "post",
-                 contentType: "application/json; charset=utf-8",
-                dataType: 'json',
-                data: JSON.stringify({
-                    maCBNV: $("#addqlma").val(),
-                    maDonVi: $('#addqldv').val(),
-                    maChucVu: $('#addqlcv').val(),
-                    thoiHan: $('#addqlth').val(),          
-                }),
-                success: function () {         
-                    loadcb();
-                   confirm("Thêm Thành Công");
-                    console.log( $('#addma').val());
-                   
-
-                },
-                error: function(data){
-                    confirm("Lỗi Dữ liệu !!! Kiểm Tra Lại.");
-                     Addql($('#addma').val());
-                }
-            });
+    $.ajax({
+    url: "/api/Ctql/"+id,
+    type: "post",
+    contentType: "application/json; charset=utf-8",
+    dataType: 'json',
+    data: JSON.stringify({
+    maCBNV: $("#addqlma").val(),
+    maDonVi: $('#addqldv').val(),
+    maChucVu: $('#addqlcv').val(),
+    thoiHan: $('#addqlth').val(),          
+    }),
+    success: function () {         
+        loadcb();
+        confirm("Thêm Thành Công");
+        console.log( $('#addma').val());
+        },
+        error: function(data){
+            confirm("Lỗi Dữ liệu !!! Kiểm Tra Lại.");
+            Addql($('#addma').val());
+            }
         });
+    });
+}
+function convetToVietnam(str) { 
+    str= str.toLowerCase();
+    str= str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g,"a"); 
+    str= str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g,"e"); 
+    str= str.replace(/ì|í|ị|ỉ|ĩ/g,"i"); 
+    str= str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g,"o"); 
+    str= str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g,"u"); 
+    str= str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g,"y"); 
+    str= str.replace(/đ/g,"d"); 
+    
+    str= str.replace(/-+-/g,"-");
+    str= str.replace(/^\-+|\-+$/g,""); 
+
+    return str; 
+}
+function seach(){
+    $.ajax({
+        type: "GET",
+        url: "/api/Cbnv",
+        success: function(data){
+            keyOld = $("#seach").val();
+            arr = $("#tbody tr");
+            // console.log(arr);
+            for (i = 0; i < arr.length; i++) {
+                element = arr[i].getElementsByTagName("td")[1].innerHTML;
+                 tt =convetToVietnam(element); 
+                let key=convetToVietnam(keyOld);
+                console.log(tt.toUpperCase().indexOf(key.toUpperCase()));
+                if (tt.toUpperCase().indexOf(key.toUpperCase()) > -1) {
+                    arr[i].style.display = "";
+                } else {
+                    arr[i].style.display = "none";
+                }
+            }
         }
+    });
+}
+
 </script>
 }
