@@ -61,15 +61,16 @@ namespace NguyenPhuLoc.Controllers
                 return BadRequest();
             }
         }
-        [HttpPost("Add/{id}")]
-        public IActionResult Post([FromBody] ChiTietQuanLy ql,string id)
+        [HttpPost("Add")]
+        public IActionResult Post([FromBody] ChiTietQuanLy ql)
         {
           try
-          {
+          {  
+              ql.NgayQuyetDinh= DateTime.Now;
               ql.TrangThai=true;
             ChiTietQuanLy ctql=new ChiTietQuanLy(){
-                MaCBNV=id.ToString(),
-                NgayQuyetDinh=DateTime.Now,
+                MaCBNV=ql.MaCBNV,
+                NgayQuyetDinh=ql.NgayQuyetDinh,
                 MaDonVi=ql.MaDonVi,
                 MaChucVu=ql.MaChucVu,
                 ThoiHan=ql.ThoiHan,

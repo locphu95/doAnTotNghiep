@@ -114,7 +114,6 @@ namespace NguyenPhuLoc.Controllers
               edit.DienThoai=cb.DienThoai;
               edit.TenDangNhap=cb.TenDangNhap;
               edit.MatKhau=cb.MatKhau;
-
             _db.SaveChanges();
             return Ok("Them thanh cong");
           }
@@ -122,29 +121,35 @@ namespace NguyenPhuLoc.Controllers
              return BadRequest();
           }
         }
-        [HttpPost("Delete/{id}")]
-         public IActionResult Post3([FromBody] CBNV cb,string id)
+        [HttpGet("Delete/{id}")]
+         public IActionResult Post3(string id)
         {
           try{
-            cb.TrangThai=false;
             CBNV del =_db.CBNV.FirstOrDefault(x=>x.MaCBNV==id);
-              del.HoCBNV=cb.HoCBNV;
-              del.TenCBNV=cb.TenCBNV;
-              del.MaLoaiGiangVien=cb.MaLoaiGiangVien;
-              del.MaQuyen=cb.MaQuyen;
-              del.NTNS=cb.NTNS;
-              del.Email=cb.Email;
-              del.DiaChi=cb.DiaChi;
-              del.DienThoai=cb.DienThoai;
-              del.TenDangNhap=cb.TenDangNhap;
-              del.MatKhau=cb.MatKhau;
-              del.TrangThai=cb.TrangThai;
+             del.TrangThai = false;
             _db.SaveChanges();
-            return Ok("Them thanh cong");
+            return Ok("Xoa thanh cong");
           }
           catch{
              return BadRequest();
           }
-        }   
+        }
+       [HttpGet("Seach/{id}")]
+        public IActionResult Post4(string id)
+        {
+          try
+          {
+           var model = from m in _db.CBNV 
+            where m.HoCBNV.Contains(id) || m.TenCBNV.Contains(id)
+            select m;
+
+         // var model = _db.CBNV.ToList();
+            return Ok(model);
+          }
+          catch (Exception)
+          {
+            return BadRequest();
+          }
+        }
   }
 }
