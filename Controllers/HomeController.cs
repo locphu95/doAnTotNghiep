@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -56,24 +56,23 @@ namespace NguyenPhuLoc.Controllers
         }
         public IActionResult Login()
         {
-
-            return RedirectToAction("Home","Cbnv");
+            return View();
         }
         [HttpPost]
-        public ActionResult Login(string uname, string psw)
+        [ValidateAntiForgeryToken]
+        public ActionResult Login(string id, string pass)
         {
              List<CBNV> list = new List<CBNV>();
              CBNV temp = new CBNV();
-            var us = _db.CBNV.SingleOrDefault(x => x.TenDangNhap == uname && x.MatKhau == psw);
+            var us = _db.CBNV.SingleOrDefault(x => x.TenDangNhap == id && x.MatKhau == pass);
             if (us == null)
             {
                 ViewBag.mess = "Sai tài khoản hoặc mật khẩu !";
                 return View();
             }
             else
-            {
-               
-                return RedirectToAction("Home", "Admin");
+            {  
+                return RedirectToAction("ChaoMung", "Admin");
             }
         }
 
