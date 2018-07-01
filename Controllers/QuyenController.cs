@@ -25,7 +25,7 @@ namespace NguyenPhuLoc.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var model = _db.Quyen.ToList();
+            var model = from a in _db.Quyen where a.TrangThai == true select a;
             return Ok(model);
         }
         [HttpGet("{id}")]
@@ -60,6 +60,52 @@ namespace NguyenPhuLoc.Controllers
             {
                 return BadRequest();
             }
+        }
+        [HttpGet("Delete/{id}")]
+         public IActionResult Post3(string id)
+        {
+          try{
+            Quyen del =_db.Quyen.FirstOrDefault(x=>x.MaQuyen==id);
+             del.TrangThai = false;
+            _db.SaveChanges();
+            return Ok("Xoa thanh cong");
+          }
+          catch{
+             return BadRequest();
+          }
+        }
+        [HttpPost]
+      public IActionResult Post([FromBody] Quyen qd)
+        {
+          qd.TrangThai=true;
+          try
+          {
+            Quyen tour=new  Quyen(){
+                MaQuyen=qd.MaQuyen,
+                TenQuyen=qd.TenQuyen,
+                TrangThai=qd.TrangThai
+            };
+            _db.Quyen.Add(tour);
+            _db.SaveChanges();
+            return Ok("Them thanh cong");
+          }
+          catch (Exception)
+          {
+            return BadRequest();
+          }
+        }
+        [HttpPost("Edit/{id}")]
+         public IActionResult Post2([FromBody] Quyen cb,string id)
+        {
+          try{
+            Quyen edit =_db.Quyen.FirstOrDefault(x=>x.MaQuyen==id);
+              edit.TenQuyen=cb.TenQuyen;
+            _db.SaveChanges();
+            return Ok("Them thanh cong");
+          }
+          catch{
+             return BadRequest();
+          }
         }
 
 

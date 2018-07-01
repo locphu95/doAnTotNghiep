@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -56,6 +56,7 @@ namespace NguyenPhuLoc.Controllers
         }
         public IActionResult Login()
         {
+
             return View();
         }
         [HttpPost]
@@ -74,7 +75,7 @@ namespace NguyenPhuLoc.Controllers
             {  
                 return RedirectToAction("ChaoMung", "Admin");
             }
-        }
+}
 
     }
      public static class SessionExtensions

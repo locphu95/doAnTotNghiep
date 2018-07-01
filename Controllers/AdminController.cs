@@ -21,8 +21,51 @@ namespace NguyenPhuLoc.Controllers
         {
             return View();
         }
-        
-         public IActionResult Danhmucnghiepvu()
+         public IActionResult Quyetdinh()
+        {
+            return View();
+        }
+         public IActionResult Quyen()
+        {
+            return View();
+        }
+         public IActionResult Chucvu()
+        {
+            return View();
+        }
+         public IActionResult Loaigiangvien()
+        {
+            return View();
+        }
+         public IActionResult Namhoc()
+        {
+            return View();
+        }
+         public IActionResult Hocky()
+        {
+            return View();
+        }
+         public IActionResult Hotro()
+        {
+            return View();
+        }
+         public IActionResult Congviec()
+        {
+            return View();
+        }
+         public IActionResult Donvi()
+        {
+            return View();
+        }
+         public IActionResult Nhiemvu()
+        {
+            return View();
+        }
+         public IActionResult Quydinh()
+        {
+            return View();
+        }
+        public IActionResult Danhmucnghiepvu()
         {
             return View();
         } 
@@ -33,9 +76,17 @@ namespace NguyenPhuLoc.Controllers
           public IActionResult Chaomung()
         {
             return View();
+        } 
+        public IActionResult ThongKe()
+        {
+            return View();
         }
 
-        
+
+        public IActionResult Thongkekhoa()
+        {
+            return View();
+        }
         
     }
 }

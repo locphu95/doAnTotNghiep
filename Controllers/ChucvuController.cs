@@ -25,7 +25,7 @@ namespace NguyenPhuLoc.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var model =_db.ChucVu.ToList();
+            var model =from a in _db.ChucVu where a.TrangThai==true select a;
             return Ok(model);
         }
         [HttpGet("{id}")]

@@ -8,24 +8,23 @@ namespace NguyenPhuLoc.Controllers
 {
     [Produces("application/json")]
     [Route("api/[controller]")]
-    public class QuyendinhController : Controller
+    public class QuyetdinhController : Controller
     {
         private AppDbContext _db;
-        public QuyendinhController(AppDbContext db)
+        public QuyetdinhController(AppDbContext db)
         {
             _db = db;
         }
-        [HttpGet("{ma}")]
-        public IActionResult Get(string ma)
-        {
-            var model = _db.QuyetDinh.Where(x => x.SoQuyetDinh == ma).ToList();
-            return Ok(model);
-        }
+
 
         [HttpGet]
         public IActionResult Get()
         {
-            var model = _db.QuyetDinh.ToList();
+            var model = (from qd in _db.QuyetDinh join cb in _db.CBNV on qd.MaCBNV equals cb.MaCBNV
+                            join lqd in _db.LoaiQuyetDinh on qd.MaLoaiQuyetDinh equals lqd.MaLoaiQuyetDinh
+            where qd.TrangThai==true select new {
+                qd, cb,lqd
+            }).Distinct();
             return Ok(model);
         }
         [HttpGet("{id}")]
@@ -33,8 +32,13 @@ namespace NguyenPhuLoc.Controllers
         {
             try
             {
-                QuyetDinh model = _db.QuyetDinh.Find(id);
-                return Ok(model);
+                var model =(from a in _db.QuyetDinh
+                            join b in _db.CBNV on a.MaCBNV equals b.MaCBNV
+                            join c in _db.LoaiQuyetDinh on a.MaLoaiQuyetDinh equals c.MaLoaiQuyetDinh
+                            where a.SoQuyetDinh == id
+                            select new { a.SoQuyetDinh,a.MaCBNV,a.NgayBanHanh,a.NoiDungQuyetDinh,
+                            a.ThoiHan,a.HinhThuc, a.LoaiQuyetDinh,c.TenLoaiQuyetDinh, b.HoCBNV,b.TenCBNV}).SingleOrDefault();
+                return Ok(model);   
             }
             catch (Exception)
             {
@@ -42,24 +46,78 @@ namespace NguyenPhuLoc.Controllers
             }
         }
         [HttpGet("Detail/{id}")]
-        public IActionResult GetDetail(int id)
+        public IActionResult GetDetail(string id)
         {
             try
             {
-                var model = (from cb in _db.CBNV
-                             from l in _db.LoaiGiangVien
-                             where cb.MaLoaiGiangVien == l.MaLoaiGiangVien
-                             select new
-                             {
-                                 l.TenLoaiGiangVien,
-
-                             }).ToList();
-                return Ok(model);
+                var model = (from qd in _db.QuyetDinh join cb in _db.CBNV on qd.MaCBNV equals cb.MaCBNV
+                            join lqd in _db.LoaiQuyetDinh on qd.MaLoaiQuyetDinh equals lqd.MaLoaiQuyetDinh
+                            where qd.SoQuyetDinh == id
+                            select new {
+                qd, cb,lqd
+            }).Distinct();
+            return Ok(model);
             }
             catch (Exception)
             {
                 return BadRequest();
             }
+        }
+        [HttpPost("Edit/{id}")]
+         public IActionResult Post2([FromBody] QuyetDinh cb,string id)
+        {
+          try{
+            QuyetDinh edit =_db.QuyetDinh.FirstOrDefault(x=>x.SoQuyetDinh==id);
+              edit.MaCBNV=cb.MaCBNV;
+              edit.MaLoaiQuyetDinh=cb.MaLoaiQuyetDinh;
+              edit.NgayBanHanh=cb.NgayBanHanh;
+              edit.NoiDungQuyetDinh=cb.NoiDungQuyetDinh;
+              edit.HinhThuc=cb.HinhThuc;
+              edit.ThoiHan=cb.ThoiHan;
+            _db.SaveChanges();
+            return Ok("Them thanh cong");
+          }
+          catch{
+             return BadRequest();
+          }
+        }
+        [HttpPost]
+      public IActionResult Post([FromBody] QuyetDinh qd)
+        {
+          qd.TrangThai=true;
+          try
+          {
+            QuyetDinh tour=new QuyetDinh(){
+                SoQuyetDinh=qd.SoQuyetDinh,
+                MaCBNV=qd.MaCBNV,
+                MaLoaiQuyetDinh=qd.MaLoaiQuyetDinh,
+                ThoiHan=qd.ThoiHan,
+                NgayBanHanh=qd.NgayBanHanh,
+                NoiDungQuyetDinh=qd.NoiDungQuyetDinh,
+                HinhThuc=qd.HinhThuc,
+                TrangThai=qd.TrangThai
+            };
+            _db.QuyetDinh.Add(tour);
+            _db.SaveChanges();
+            return Ok("Them thanh cong");
+          }
+          catch (Exception)
+          {
+            return BadRequest();
+          }
+        }
+        [HttpGet("Delete/{id}")]
+         public IActionResult Post3(string id)
+        {
+          try{
+            QuyetDinh del =_db.QuyetDinh.FirstOrDefault(x=>x.SoQuyetDinh==id);
+             del.TrangThai = false;
+            _db.SaveChanges();
+            return Ok("Xoa thanh cong");
+          }
+          catch{
+             return BadRequest();
+          }
         }
 
 
