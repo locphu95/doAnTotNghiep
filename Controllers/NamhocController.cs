@@ -15,43 +15,23 @@ namespace NguyenPhuLoc.Controllers
         {
             _db = db;
         }
-        [HttpGet("{manv}")]
-        public IActionResult Get(string manv)
-        {
-            var model = _db.NamHoc.Where(x => x.MaNamHoc == manv).ToList();
-            return Ok(model);
-        }
-
         [HttpGet]
         public IActionResult Get()
         {
-            var model = _db.NamHoc.ToList();
+            var model =from a in  _db.NamHoc where a.TrangThai==true select a;
             return Ok(model);
         }
-        [HttpGet("{id}")]
-        public IActionResult Getcv(string id)
-        {
-            try
-            {
-                NamHoc model = _db.NamHoc.Find(id);
-                return Ok(model);
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
         [HttpGet("Detail/{id}")]
-        public IActionResult GetDetail(int id)
+        public IActionResult GetDetail(string id)
         {
             try
             {
-                var model = (from cb in _db.CBNV
-                             from l in _db.LoaiGiangVien
-                             where cb.MaLoaiGiangVien == l.MaLoaiGiangVien
+                var model = (from nh in _db.NamHoc 
+                             join hk in _db.HocKy on nh.MaNamHoc equals hk.MaNamHoc
+                             where nh.MaNamHoc==id
                              select new
                              {
-                                 l.TenLoaiGiangVien,
+                                nh.MaNamHoc,nh.NgayBatDauNamHoc,nh.NgayKetThucNamHoc,nh.MoTaNamHoc,hk
 
                              }).ToList();
                 return Ok(model);
@@ -61,7 +41,40 @@ namespace NguyenPhuLoc.Controllers
                 return BadRequest();
             }
         }
-
+        public IActionResult Post([FromBody] NamHoc cb)
+        {
+          cb.TrangThai=true;
+          try
+          {
+            NamHoc tour=new NamHoc(){
+                MaNamHoc=cb.MaNamHoc,
+                NgayBatDauNamHoc=cb.NgayBatDauNamHoc,
+                NgayKetThucNamHoc= cb.NgayKetThucNamHoc,
+                MoTaNamHoc=cb.MoTaNamHoc,
+                TrangThai=cb.TrangThai
+            };
+            _db.NamHoc.Add(tour);
+            _db.SaveChanges();
+            return Ok("Them thanh cong");
+          }
+          catch (Exception)
+          {
+            return BadRequest();
+          }
+        }
+     [HttpGet("Delete/{id}")]
+         public IActionResult Post3(string id)
+        {
+          try{
+            NamHoc del =_db.NamHoc.FirstOrDefault(x=>x.MaNamHoc==id);
+             del.TrangThai = false;
+            _db.SaveChanges();
+            return Ok("Xoa thanh cong");
+          }
+          catch{
+             return BadRequest();
+          }
+        }
 
 
     }
