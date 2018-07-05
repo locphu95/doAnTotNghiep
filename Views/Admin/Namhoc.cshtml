@@ -31,33 +31,13 @@
                     </div>
                     <div class="modal-body">
                         <input  type="hidden" id="editmanamhoc" class="inputs" type="text"/>
-                        <p>Ngày Bắt Đầu:
-                            <input id="editngaybatdau" class="inputs" type="text"/></p>
-                        <p>Ngày Kết Thúc: 
-                        <input id="editngayketthuc" class="inputs" type="text"/></p>
+                                <p>Ngày Bắt Đầu Cũ:
+                                <input id="editngaybatdau" class="inputs" type="text"/></p>
+                                <p>Ngày Kết Thúc Cũ: 
+                                <input id="editngayketthuc" class="inputs" type="text"/></p>
+                         
                         <p>Mô Tả :
                             <textarea class="form-control" rows="5" id="editmota"></textarea> </p>
-
-                        <!-- <div style="width: 100%;display:block">
-                            <div class="label-name-cbnv">
-                                <label class="lable-cbnv">Số Quy Định :</label>
-                                <label class="lable-cbnv">Tên CBNV : </label>
-                                <label class="lable-cbnv">Loại Quyết Định: </label>
-                                <label class="lable-cbnv">Ngày Ban Hành :</label>
-                                <label class="lable-cbnv">Nội Dung : </label>
-                                <label class="lable-cbnv">Hình Thức: </label>
-                                <label class="lable-cbnv">Thời Hạn: </label>
-                            </div>
-                            <div class="input-content-cbnv">
-                                <input id="editsoquyetdinh" class="inputs" type="text"/>
-                                <select  class="inputs" id="editcbnv"></select></p>
-                                <select  class="inputs" id="editloaiquyetdinh"></select></p>
-                                <input id="editngayquyetdinh" class="inputs" type="text"/></p>
-                                <textarea class="form-control" id="editnoidungquyetdinh" rows="5" id="comment"></textarea></p>
-                                <input id="edithinhthuc" class="inputs" type="text"/></p>
-                                <input id="editthoihan" class="inputs" type="text"/></p>
-                            </div>
-                        </div>        -->
                     </div>
                     <div class="modal-footer" id="edit3">
                         
@@ -133,6 +113,8 @@
     <ul class=pagination>
             <li id="previous-page"><a href="javascript:void(0)" aria-label=Previous><span aria-hidden=true>&laquo;</span></a></li>
     </ul>
+
+
     @section scripts{
         <script src="~/Assets/Personal/js/vendor/jquery-1.11.2.min.js"></script>
         <script src="~/Assets/Personal/js/vendor/momen.js"></script>
@@ -162,7 +144,7 @@
         return res;
     }
     function loadcb(){
-        $.ajax({
+            $.ajax({
             type: "GET",
             url: "/api/Namhoc/",
             success: function(data){
@@ -301,48 +283,59 @@
             success:function(data){
                 console.log("chi tiet")
                 console.log(data.length)
-                if(data.length <0)
-                {
-                    
-                }
-                else
-                {
+                console.log("ma hoc ky")
+                var cot = data.map(function(hocky){
+                return " " + hocky.maHocKy + " ";
+                })
+                 console.log(cot);
                 for(i=0;i<data.length;i++){
                 console.log(data[i]);
                 $("#detailmaloaigiangvien").val(data[i].maNamHoc);
                 $("#detailngaybatdau").val(convertDatetime(data[i].ngayBatDauNamHoc));
                 $("#detailngayketthuc").val(convertDatetime(data[i].ngayKetThucNamHoc));
                 $("#detailmota").val(data[i].moTaNamHoc);
-                $("#detailhocky").val(data[i].hk.maHocKy);
                 $("#edit1").html('<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
                 }
-            }}
+                $("#detailhocky").val(cot+" ");
+                
+            }
             
         })
     }
     function suaNamhoc(id){
+        $("#editngaybatdau").datepicker({
+    autoclose:true,
+    orientation: "bottom",
+    format: "mm-dd-yyyy"
+        })
+  $("#editngayketthuc").datepicker({
+    autoclose:true,
+    orientation: "bottom",
+    format: "mm-dd-yyyy"
+        })
+
         $("#editcbModal").modal("show");
         $.ajax({
-            url:'/api/Loaigiangvien/'+ id,
+            url:'/api/Namhoc/'+ id,
             type: "GET",
             success:function(item){
-                console.log("get data");
-                console.log(item);
-                $("#editbaohiem").val(item.baoHiem);
-                $("#editmaloaigiangvien").val(item.maLoaiGiangVien);
-                $("#edittenloaigiangvien").val(item.tenLoaiGiangVien);
-                $("#edit3").html('<button onclick="saveedit(\''+ item.maLoaiGiangVien +'\')" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+                $("#editmanamhoc").val(item.maNamHoc);
+                $("#editngaybatdau").val(convertDatetime(item.ngayBatDauNamHoc));
+                $("#editngayketthuc").val(convertDatetime(item.ngayKetThucNamHoc));
+                $("#editmota").val(item.moTaNamHoc);
+                $("#edit3").html('<button onclick="saveedit(\''+ item.maNamHoc +'\')" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
             }
         })
     }
     function saveedit(id){
-        var tenloai=   $('#edittenloaigiangvien').val();
-        var baohiem= $('#editbaohiem').val();
-        var maloai=$('#editmaloaigiangvien').val();
-        var temp = new LoaiGiangVien(maloai,tenloai,baohiem);
+        var manamhoc=   $('#editmanamhoc').val();
+        var ngaybatdau= $('#editngaybatdau').val();
+        var ngayketthuc=$('#editngayketthuc').val();
+        var mota = $('#editmota').val();
+        var temp = new Namhoc(manamhoc,ngaybatdau,ngayketthuc,mota);
         console.log(temp);
             $.ajax({
-                url:'/api/Loaigiangvien/Edit/'+id,
+                url:'/api/Namhoc/Edit/'+id,
                 type:'POST',
                 dataType: 'json',
                 data: JSON.stringify(temp),
@@ -350,7 +343,7 @@
                     success: function(){
                         alert("Cập Nhật Thành Công");
                         location.reload();
-                        console.log(ns);
+                        console.log(temp);
                     },
                     error: function(){
                         alert("Cập Nhật Thất Bại")
