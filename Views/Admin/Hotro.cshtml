@@ -14,9 +14,15 @@
                 </div>
                 <div class="modal-body">              
                     <p>Loại Hỗ Trợ : <input id="addma" class="inputs" type="text"/></p>
-                    <p>Nguồn Hỗ Trợ : <select id="addnamhoc" class="inputs"></select></p>
-                    <p>Số Lượng : <input id="addngaybd" class="inputs" type="number" value="1"/></p>
-                    <p>Đơn Vị Tính :  <input  class="inputs" id="addngaykt" type="text" /></p>
+                    <p>Nguồn Hỗ Trợ : <select id="addnguon" class="inputs">
+                        <option selected="true" disabled>Chọn Nguồn Hỗ Trợ</option>
+                        <option value="Thành Phố">Thành Phố</option>
+                        <option value="Trường">Trường</option>
+                        <option value="Khoa">Khoa</option>
+                        <option value="Khác">Khác</option></select></p>
+                    <p>Loại Hỗ Trợ : <input type="text" class="inputs" id="addloai"/></p>
+                    <p>Số Lượng : <input id="addsoluong" class="inputs" type="number" value="1"/></p>
+                    <p>Đơn Vị Tính :  <input  class="inputs" id="adddonvitinh" type="text" /></p>
                 </div>
                 <div class="modal-footer" id="">
                     <button id="saveCbnv" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button>
@@ -34,10 +40,16 @@
                     <h4 class="add">Sửa Thông Tin Cán Bộ</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Học Kỳ : <input id="editmahk" class="inputs" type="text"/></p>
-                    <p>Năm Học :  <select  class="inputs" id="editmanamhoc"></select></p>
-                    <p>Ngày Bắt Đầu: <input id="editngaybd" class="inputs" type="text"/></p>
-                    <p>Ngày Kết Thúc:<input id="editngaykt" class="inputs" type="text"/></p>
+                    <p>Loại Hỗ Trợ : <input id="editma" class="inputs" type="text"/></p>
+                    <p>Nguồn Hỗ Trợ : <select id="editnguon" class="inputs">
+                        <option selected="true" disabled>Chọn Nguồn Hỗ Trợ</option>
+                        <option value="Thành Phố">Thành Phố</option>
+                        <option value="Trường">Trường</option>
+                        <option value="Khoa">Khoa</option>
+                        <option value="Khác">Khác</option></select></p>
+                    <p>Loại Hỗ Trợ : <input type="text" class="inputs" id="editloai"/></p>
+                    <p>Số Lượng : <input id="editsoluong" class="inputs" type="number" value="1"/></p>
+                    <p>Đơn Vị Tính :  <input  class="inputs" id="editdonvitinh" type="text" /></p>
                 </div>
                 <div class="modal-footer" id="edit3">
                     
@@ -56,15 +68,11 @@
             </div>
             <div class="modal-body">   
                 <fieldset disabled>  
-                <input  type="hidden" id="detailma" class="inputs" type="text">
-                <p>  Họ & Tên : <input id="detailho" class="inputs" type="text"/></p>
-                <p>  Ngày Sinh : <input id="detailns" class="inputs" type="text"/></p>
-                <p>  Phái : <input id="detailphai" class="inputs" type="text"/></p>
-                <p>  Chức Vụ : <input id="detailcv" class="inputs" type="text"/></p>
-                <p>  Đơn Vị : <input id="detailtdv" class="inputs" type="text"/></p>
-                <p>  Học Vị : <input id="detailhv" class="inputs" type="text"/></p>
-                <p>  Số Điện Thoại : <input id="detailsdt" class="inputs" type="text"/></p>
-                <p>  Địa Chỉ : <input id="detaildc" class="inputs" type="text"/></p>
+                    <p>Loại Hỗ Trợ : <input id="detailma" class="inputs" type="text"/></p>
+                    <p>Nguồn Hỗ Trợ : <input id="detailnguon" type="text" class="inputs"/></p>
+                    <p>Loại Hỗ Trợ : <input type="text" class="inputs" id="detailloai"/></p>
+                    <p>Số Lượng : <input id="detailsoluong" class="inputs" type="number" value="1"/></p>
+                    <p>Đơn Vị Tính :  <input  class="inputs" id="detaildonvitinh" type="text" /></p>
                 </fieldset>    
             </div>
             <div class="modal-footer" id="edit1"></div>
@@ -106,6 +114,7 @@
     <tr align='center' height='30px'>
         <td>Loại Hỗ Trợ</td>
         <td>Nguồn Hỗ Trợ</td>
+        <td>Loại Hỗ Trợ</td>
         <td>Số Lượng</td>
         <td>Đơn Vị Tính</td>
          <td></td>
@@ -128,12 +137,13 @@ $(document).ready(function () {
     //          });
      
 })
-class HocKy {
-            constructor(ma,manh,ngaydb,ngaykt) {
-            this.maHocKy=ma;
-            this.maNamHoc=manh;
-            this.ngayBatDauHocKy=ngaydb;
-            this.ngayKetThucHocKy=ngaykt;
+class Hotro {
+            constructor(ma,nguon,sl,loai,dvt) {
+            this.maHoTro=ma;
+            this.nguonHoTro=nguon;
+            this.loaiHoTro=loai;
+            this.soLuong=sl;
+            this.donViTinh=dvt
             }
         }
 function convertDatetime(dt) {
@@ -164,10 +174,11 @@ function loadcbnv(item) {
     detailsHtml ='<tr class="list-group">';
     detailsHtml += '<td>'+item.maHoTro+'</td>'+
     '<td >'+item.nguonHoTro +'</td>'+
+    '<td >'+item.loaiHoTro +'</td>'+
     '<td>'+item.soLuong +'</td>'+
     '<td>'+item.donViTinh+'</td>'+
     '<td>'
-    +'<button type="button" class=" btn btn-info fa fa-edit showcn" onclick="suaHocky(\''+ item.maHoTro +'\')"><span class="tooltiptext">Sửa</span></button>|<button type="button" class="btn btn-info fa fa-file-text-o showcn" onclick="chitietHocky(\'' + item.maHocKy + '\')"><span class="tooltiptext">Chi tiết</span></button>|<button type="button" class="btn btn-info fa fa-trash-o showcn" onclick="xoaHocky(\'' + item.maHocKy + '\')"><span class="tooltiptext">Xóa </span></button> '
+    +'<button type="button" class=" btn btn-info fa fa-edit showcn" onclick="suaHocky(\''+ item.maHoTro +'\')"><span class="tooltiptext">Sửa</span></button>|<button type="button" class="btn btn-info fa fa-file-text-o showcn" onclick="chitietHocky(\'' + item.maHoTro + '\')"><span class="tooltiptext">Chi tiết</span></button>|<button type="button" class="btn btn-info fa fa-trash-o showcn" onclick="xoaHocky(\'' + item.maHoTro + '\')"><span class="tooltiptext">Xóa </span></button> '
     detailsHtml +='</tr>';  
     return detailsHtml;
 }
@@ -252,18 +263,18 @@ function xoaHocky(id){
     $("#deleteModel").modal("show");
 
     $.ajax({
-        url:'/api/Hocky/'+ id,
+        url:'/api/Hotro/'+ id,
         type: "GET",
         success:function(data){
             console.log(data);
-            $("#deletema").val(data.maHocKy);
-            $("#edit2").html('<button onclick="savedelete(\''+ data.maHocKy +'\')" type="button" class="btn btn-default" data-dismiss="modal">Xóa</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+            $("#deletema").val(data.maHoTro);
+            $("#edit2").html('<button onclick="savedelete(\''+ data.maHoTro +'\')" type="button" class="btn btn-default" data-dismiss="modal">Xóa</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
         }
     })
 }
 function savedelete(id){
     $.ajax({
-        url:'/api/Hocky/Delete/'+id,
+        url:'/api/Hotro/Delete/'+id,
         type:'GET',
         contentType: "application/json; charset=utf-8",
         dataType: 'json',
@@ -279,59 +290,31 @@ function savedelete(id){
     });
 }
 function suaHocky(id){
-
-     $("#editngaybd").datepicker({
-    autoclose:true,
-    orientation: "bottom",
-    format: "mm-dd-yyyy",
-    })
-    $("#editngaykt").datepicker({
-    autoclose:true,
-    orientation: "bottom",
-    format: "mm-dd-yyyy"
-        })
-    let dropdown3 = $('#editmanamhoc');
-    dropdown3.empty();
     $("#editcbModal").modal("show");
     $.ajax({
-        url:'/api/Hocky/'+ id,
+        url:'/api/Hotro/'+ id,
         type: "GET",
         success:function(data){
-            $("#editmahk").val(data.maHocKy);
-            $("#editngaybd").val(convertDatetime(data.ngayBatDauHocKy));
-            $("#editngaykt").val(convertDatetime(data.ngayKetThucHocKy));
-            dropdown3.append('<option selected="true" disabled>Chọn Năm Học</option>');
-            dropdown3.prop('selectedIndex', 0);
-            const url3 = '/api/Namhoc';
-            // Populate dropdown with list of provinces
-                $.getJSON(url3, function (dat) {
-                    console.log('step 1');
-                    console.log(dat);
-                    dat.forEach(key => {
-                        console.log(key);
-                         if (key.maNamHoc == data.maNamHoc) {
-                            dropdown3.append($('<option selected="true" value='+key.maNamHoc+'></option>').text("["+key.maNamHoc+"]"+" " +"Bắt Đầu Từ Ngày : "+ convertDatetime(key.ngayBatDauNamHoc)+ " " +" Đến Ngày :" + convertDatetime(key.ngayKetThucNamHoc)));
-                        }
-                        else {
-                            dropdown3.append($('<option value='+key.maNamHoc+'></option>').text( "["+key.maNamHoc+"]"+" " +"Bắt Đầu Từ Ngày : "+ convertDatetime(key.ngayBatDauNamHoc)+ " " +" Đến Ngày :" + convertDatetime(key.ngayKetThucNamHoc)));
-                            }
-                        })
-                    })
-            $("#edit3").html('<button onclick="saveedit(\''+ data.maHocKy +'\')" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
+            $("#editma").val(data.maHoTro);
+            $("#editnguon").val(data.nguonHoTro);
+            $("#editsoluong").val(data.soLuong);
+            $("#editloai").val(data.loaiHoTro);
+            $("#editdonvitinh").val(data.donViTinh);
+            $("#edit3").html('<button onclick="saveedit(\''+ data.maHoTro +'\')" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
             console.log(data);
         }
     })
 }
 function saveedit(id){
-    var ma = $('#editmahk').val();
-    var  manh = $('#editmanamhoc').val();
-    var ngaydb = $('#editngaybd').val();
-    var ngaykt = $('#editngaykt').val();
-
-       var tem = new  HocKy (ma,manh,ngaydb,ngaykt) 
+    var ma = $('#editma').val();
+    var  nguon = $('#editnguon').val();
+    var sl = $('#editsoluong').val();
+    var loai = $('#editloai').val();
+    var dvt= $("#editdonvitinh").val();
+    var tem = new  Hotro (ma,nguon,sl,loai,dvt) 
        console.log(tem);
         $.ajax({
-            url:'/api/Hocky/Edit/'+id,
+            url:'/api/Hotro/Edit/'+id,
             type:'POST',
             dataType: 'json',
             data: JSON.stringify(tem),
@@ -347,58 +330,51 @@ function saveedit(id){
         }
 function chitietHocky(id){
     $("#detailma").val('');
-    $("#detailho").val('');
-    $("#detailns").val('');
-    $("#detailphai").val('');
-    $("#detailcv").val('')
-    $("#detailtdv").val('');
-    $("#detailhv").val('');
-    $("#detailsdt").val('');
-    $("#detaildc").val('');
+    $("#detailloai").val('');
+    $("#detailnguon").val('');
+    $("#detailsoluong").val('');
+    $("#detaildonvitinh").val('')
     $("#detaicblModal").modal("show");
     $.ajax({
-        url:'/api/Cbnv/Detail/'+ id,
+        url:'/api/Hotro/'+ id,
         type: "GET",
         success:function(data){
+            console.log("chitiet")
+            console.log(data);
             if(data.length <0)
             {
                 alert("Chưa cập nhật Chi tiết quản lý");
             }
             else
             {
-            for(i=0;i<data.length;i++){
-            console.log(data[i]);
-            $("#detailma").val(data[i].maCBNV);
-            $("#detailho").val(data[i].hoCBNV +' '+data[i].tenCBNV);
-            $("#detailns").val(convertDatetime(data[i].ntns));
-            $("#detailphai").val(data[i].phai);
-            $("#detailcv").val(data[i].tenChucVu)
-            $("#detailtdv").val(data[i].tenDonVi);
-            $("#detailhv").val(data[i].hocVi);
-            $("#detailsdt").val(data[i].dienThoai);
-            $("#detaildc").val(data[i].diaChi);
+            $("#detailma").val(data.maHoTro);
+            $("#detailloai").val(data.loaiHoTro);
+            $("#detailnguon").val(data.nguonHoTro);
+            $("#detailsoluong").val(data.soLuong)
+            $("#detaildonvitinh").val(data.donViTinh);
             $("#edit1").html('<button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
             }
-        }}
+        }
         
     })
 }
 function themHocky(){
     $('#addma').val('');
-    $('#addnamhoc').val('');
-    $('#addngaybd').val('');
-    $('#addngaykt').val('');
+    $('#addnguon').val('');
+    $('#addloai').val('');
+    $('#addsoluong').val('');
+    $('#adddonvitinh').val('');
     $("#addcbModal").modal("show");         
     }
 $('#saveCbnv').click(function () {
     var ma = $('#addma').val();
-    var  manh = $('#addnamhoc').val();
-    var ngaydb = $('#addngaybd').val();
-    var ngaykt = $('#addngaykt').val();
-
-       var tem = new  HocKy (ma,manh,ngaydb,ngaykt) 
+    var nguon = $('#addnguon').val();
+    var sl = $('#addsoluong').val();
+    var loai = $('#addloai').val();
+    var dvt = $('#adddonvitinh').val();
+    var tem = new  Hotro (ma,nguon,sl,loai,dvt) 
     $.ajax({
-        url: "/api/Hocky",
+        url: "/api/Hotro",
         type: "post",
         contentType: "application/json",
         dataType: 'json',
@@ -406,6 +382,7 @@ $('#saveCbnv').click(function () {
         success: function () {
             confirm("Thêm Thành Công");
             console.log(tem );
+             location.reload();
         },
         error: function(data){
             confirm("Lỗi Dữ liệu !!! Kiểm Tra Lại.")
