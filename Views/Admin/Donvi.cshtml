@@ -30,19 +30,12 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="add">Sửa Thông Tin Cán Bộ</h4>
+                    <h4 class="add">Sửa Thông Tin Đơn Vị</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Loại Hỗ Trợ : <input id="editma" class="inputs" type="text"/></p>
-                    <p>Nguồn Hỗ Trợ : <select id="editnguon" class="inputs">
-                        <option selected="true" disabled>Chọn Nguồn Hỗ Trợ</option>
-                        <option value="Thành Phố">Thành Phố</option>
-                        <option value="Trường">Trường</option>
-                        <option value="Khoa">Khoa</option>
-                        <option value="Khác">Khác</option></select></p>
-                    <p>Loại Hỗ Trợ : <input type="text" class="inputs" id="editloai"/></p>
-                    <p>Số Lượng : <input id="editsoluong" class="inputs" type="number" value="1"/></p>
-                    <p>Đơn Vị Tính :  <input  class="inputs" id="editdonvitinh" type="text" /></p>
+
+                    <p>Tên Đơn Vị : <input type="text" class="inputs" id="editloai"/></p>
+                    <p>Số Điện Thoại : <input id="editsoluong" class="inputs" type="text" value="1"/></p>
                 </div>
                 <div class="modal-footer" id="edit3">
                     
@@ -280,8 +273,7 @@ function suaHocky(id){
         url:'/api/Donvi/'+ id,
         type: "GET",
         success:function(data){
-            $("#editma").val(data.maDonVi);
-            $("#editnguon").val(data.tenDonVi);
+            $("#editloai").val(data.tenDonVi);
             $("#editsoluong").val(data.dienThoai);
             $("#edit3").html('<button onclick="saveedit(\''+ data.maDonVi +'\')" type="button" class="btn btn-default" data-dismiss="modal">Lưu lại</button> <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>');
             console.log(data);
@@ -289,10 +281,9 @@ function suaHocky(id){
     })
 }
 function saveedit(id){
-    var ma = $('#editma').val();
-    var  ten = $('#editnguon').val();
+    var ma = id;
+    var  ten = $('#editloai').val();
     var sdt = $('#editsoluong').val();
-    var loai = $('#editloai').val();
     var tem = new  DonVi (ma,ten,sdt)
        console.log(tem);
         $.ajax({
