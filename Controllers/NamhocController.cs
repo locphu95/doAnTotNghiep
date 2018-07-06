@@ -21,6 +21,12 @@ namespace NguyenPhuLoc.Controllers
             var model =from a in  _db.NamHoc where a.TrangThai==true select a;
             return Ok(model);
         }
+        [HttpGet("{id}")]
+        public IActionResult GetNH(string id)
+        {
+            var model= _db.NamHoc.Find(id);
+            return Ok(model);
+        }
         [HttpGet("Detail/{id}")]
         public IActionResult GetDetail(string id)
         {
@@ -28,13 +34,14 @@ namespace NguyenPhuLoc.Controllers
             {
                 var model = (from nh in _db.NamHoc 
                              join hk in _db.HocKy on nh.MaNamHoc equals hk.MaNamHoc
-                             where nh.MaNamHoc==id
+                             where nh.MaNamHoc==id 
                              select new
                              {
-                                nh.MaNamHoc,nh.NgayBatDauNamHoc,nh.NgayKetThucNamHoc,nh.MoTaNamHoc,hk
+                                nh.MaNamHoc,nh.NgayBatDauNamHoc,nh.NgayKetThucNamHoc,nh.MoTaNamHoc,hk.MaHocKy
 
                              }).ToList();
-                return Ok(model);
+                var kq = from a in model group a by new{ a.MaNamHoc,a.NgayBatDauNamHoc,a.NgayKetThucNamHoc,a.MoTaNamHoc,a.MaHocKy} into g select new { g.Key.MaNamHoc,g.Key.NgayBatDauNamHoc,g.Key.NgayKetThucNamHoc,g.Key.MoTaNamHoc,g.Key.MaHocKy};
+                return Ok(kq);
             }
             catch (Exception)
             {
@@ -75,8 +82,21 @@ namespace NguyenPhuLoc.Controllers
              return BadRequest();
           }
         }
-
-
+        [HttpPost("Edit/{id}")]
+         public IActionResult Post2([FromBody] NamHoc cb,string id)
+        {
+          try{
+            NamHoc edit =_db.NamHoc.FirstOrDefault(x=>x.MaNamHoc==id);
+              edit.NgayBatDauNamHoc=cb.NgayBatDauNamHoc;
+              edit.NgayKetThucNamHoc=cb.NgayKetThucNamHoc;
+              edit.MoTaNamHoc=cb.MoTaNamHoc;
+            _db.SaveChanges();
+            return Ok("Them thanh cong");
+          }
+          catch{
+             return BadRequest();
+          }
+        }
     }
 
 
