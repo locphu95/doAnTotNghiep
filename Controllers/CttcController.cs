@@ -62,6 +62,27 @@ namespace NguyenPhuLoc.Controllers
                 return BadRequest();
             }
         }
+        [HttpPost]
+        public IActionResult Post([FromBody] ChiTietToChuc ql)
+        {
+          try
+          { 
+              ql.TrangThai=true;
+            ChiTietToChuc ctql=new ChiTietToChuc(){
+                MaCongViec=ql.MaCongViec,
+                MaDonVi=ql.MaDonVi,
+                DiaDiemToChuc=ql.DiaDiemToChuc,
+                TrangThai=ql.TrangThai
+            };
+            _db.ChiTietToChuc.Add(ctql);
+            _db.SaveChanges();
+            return Ok("Them thanh cong");
+          }
+          catch (Exception)
+          {
+            return BadRequest();
+          }
+        }
 
 
 
