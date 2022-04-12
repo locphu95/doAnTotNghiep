@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-12T06:50:46.935Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.36" etag="yvRz26iLGDDkimdip1iP" version="17.4.3" type="github" pages="2">
+<mxfile host="app.diagrams.net" modified="2022-04-12T17:33:29.950Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.36" etag="Lr1aQu_P-Yzj1CDxlWHO" version="17.4.3" type="github" pages="7">
   <diagram id="WCe-P-RAnxZw8klEhNLF" name="CSBClouter">
     <mxGraphModel dx="688" dy="478" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -34,13 +34,10 @@
           <mxGeometry y="90" width="149" height="30" as="geometry" />
         </mxCell>
         <mxCell id="wkZ2jTDMAUojiPWNhoWG-11" value="DB2" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="360" y="580" width="60" height="80" as="geometry" />
-        </mxCell>
-        <mxCell id="wkZ2jTDMAUojiPWNhoWG-12" value="SQL" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="460" y="580" width="60" height="80" as="geometry" />
+          <mxGeometry x="408" y="580" width="60" height="80" as="geometry" />
         </mxCell>
         <mxCell id="wkZ2jTDMAUojiPWNhoWG-13" value="Redis" style="shape=cylinder3;whiteSpace=wrap;html=1;boundedLbl=1;backgroundOutline=1;size=15;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="260" y="580" width="60" height="80" as="geometry" />
+          <mxGeometry x="295" y="580" width="60" height="80" as="geometry" />
         </mxCell>
         <mxCell id="wkZ2jTDMAUojiPWNhoWG-14" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=18;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="wkZ2jTDMAUojiPWNhoWG-13" target="wkZ2jTDMAUojiPWNhoWG-1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -54,13 +51,7 @@
             <mxPoint x="310" y="330" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="wkZ2jTDMAUojiPWNhoWG-16" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=18;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="wkZ2jTDMAUojiPWNhoWG-12" target="wkZ2jTDMAUojiPWNhoWG-1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="290" y="600" as="sourcePoint" />
-            <mxPoint x="390" y="510" as="targetPoint" />
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="wkZ2jTDMAUojiPWNhoWG-17" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=18;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="wkZ2jTDMAUojiPWNhoWG-11" target="wkZ2jTDMAUojiPWNhoWG-1">
+        <mxCell id="wkZ2jTDMAUojiPWNhoWG-17" value="" style="endArrow=classic;startArrow=classic;html=1;rounded=0;fontSize=18;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="wkZ2jTDMAUojiPWNhoWG-11" target="wkZ2jTDMAUojiPWNhoWG-1">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
             <mxPoint x="420" y="600" as="sourcePoint" />
             <mxPoint x="540" y="530" as="targetPoint" />
@@ -102,7 +93,7 @@
       </root>
     </mxGraphModel>
   </diagram>
-  <diagram id="HSy2Jm1so7xZymUDrrCm" name="Detail">
+  <diagram id="HSy2Jm1so7xZymUDrrCm" name="DetailCSB">
     <mxGraphModel dx="895" dy="621" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
@@ -115,9 +106,6 @@
         </mxCell>
         <mxCell id="BxQR6fe6rRM6In_AlnI_-4" value="CSBNapas" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
           <mxGeometry x="460" y="200" width="120" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="BxQR6fe6rRM6In_AlnI_-7" value="CSBOmni" style="rounded=1;whiteSpace=wrap;html=1;fontSize=18;" vertex="1" parent="1">
-          <mxGeometry x="289" y="430" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="BxQR6fe6rRM6In_AlnI_-9" value="CSBOmni" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=30;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fontSize=18;" vertex="1" parent="1">
           <mxGeometry x="279" y="303" width="140" height="90" as="geometry" />
@@ -137,6 +125,46 @@
         <mxCell id="BxQR6fe6rRM6In_AlnI_-15" value="T24VN" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;rotatable=0;fontSize=18;" vertex="1" parent="BxQR6fe6rRM6In_AlnI_-13">
           <mxGeometry y="60" width="140" height="30" as="geometry" />
         </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="pXPNyFqbfXhEKVtQw9hx" name="CSBIST">
+    <mxGraphModel dx="895" dy="621" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="uj41sWnWOoeYejN4rqvn" name="CSBT24">
+    <mxGraphModel dx="895" dy="621" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="8XT7L5a3mE7LIL9_D-Qr" name="CSBOmniCard">
+    <mxGraphModel dx="895" dy="621" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="DcBhfE_kzoZWOPnixUIP" name="CSBOutgoing">
+    <mxGraphModel dx="895" dy="621" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="6UUl7OvGB-m_p4L238vP" name="CSB-OSB">
+    <mxGraphModel dx="895" dy="621" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
       </root>
     </mxGraphModel>
   </diagram>
